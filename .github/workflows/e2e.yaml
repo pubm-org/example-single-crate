@@ -49,7 +49,7 @@ jobs:
       - name: Verify deployment
         run: |
           sleep 60
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://crates.io/api/v1/crates/pubm-test-single-crate/${{ env.VERSION }}")
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -H "User-Agent: pubm-e2e" "https://crates.io/api/v1/crates/pubm-test-single-crate/${{ env.VERSION }}")
           if [ "$STATUS" != "200" ]; then
             echo "::error::Crate not found on crates.io (HTTP $STATUS)"
             exit 1
